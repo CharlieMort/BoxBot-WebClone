@@ -1,0 +1,67 @@
+.TitleBox {
+    height: fit-content;
+    padding: 5rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-color: #1d2d50;
+    flex-direction: column;
+    color: #fcdab7;
+}
+
+.TitleBox hr {
+    width: 25%;
+}
+.TitleBox h1 {
+    margin: 0;
+    font-size: 5rem;
+}
+
+.TitleBox h2 {
+    font-size: 2rem;
+    margin:0;
+}
+
+.OutputDiv {
+    height: fit-content;
+    padding: 5rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: #133b5c;
+    height: fit-content;
+    color: #fcdab7;
+}
+
+.OutputDiv p {
+    font-size: 2rem;
+    height: max-content;
+    margin: 0;
+}
+
+#Input {
+    text-align: center;
+}
+
+.InputBox {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #133b5c;
+}
+
+input {
+    border: 5px solid #fcdab7; 
+    padding: 15px;
+    background-color: #1d2d50;
+    color: #fcdab7;
+    font-size: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0 0 10px 0;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
