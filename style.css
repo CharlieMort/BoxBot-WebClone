@@ -1,3 +1,10 @@
+body {
+    background-color: #133b5c;
+    border: 5px solid #fcdab7;
+    margin: 0;
+    padding: 5px;
+}
+
 .TitleBox {
     height: fit-content;
     padding: 5rem;
@@ -23,6 +30,7 @@
 }
 
 .OutputDiv {
+    flex: 2;
     height: fit-content;
     padding: 5rem;
     display: flex;
@@ -64,4 +72,41 @@ input {
 
 textarea:focus, input:focus{
     outline: none;
+}
+
+.MiddleSection {
+    display: flex;
+    flex-direction: row;
+}
+
+.CommandsDiv {
+    flex: 1;
+    border: 5px solid #fcdab7;
+    background-color: #133b5c;
+    color: #fcdab7;
+    padding: 2rem;
+}
+
+.CommandsDiv p b {
+    font-size: 1.5rem;
+}
+
+.CommandsDiv h1 {
+    font-size: 2rem;
+}
+
+.uncommon {
+    color: green;
+}
+
+.rare {
+    color: blue;
+}
+
+.ultrarare {
+    color: purple;
+}
+
+.god {
+    color: gold;
 }

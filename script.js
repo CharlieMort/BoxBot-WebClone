@@ -2,6 +2,7 @@ let inventory = [];
 const outputText = document.getElementById("OutputText");
 let idling;
 let money = 0;
+let awaitingSecondCommand = false;
 
 function ifEnter(ele) {
     if (event.key == "Enter") {
@@ -27,13 +28,16 @@ function submitCommand(command) {
             }
             break;
         case "stop":
-            console.log("Stopping");
             clearInterval(idling);
             idling = null;
             outputText.innerHTML = "Stopped Making Money<br>Awaiting Next Command...";
             break;
         case "sellall":
             SellAll();
+            break;
+        case "coinflip":
+            CoinFlip(command[1], command[2]);
+            break;
         default:
             console.log("Invalid Command");
             break;
@@ -49,6 +53,7 @@ function SellAll() {
             value += inventory[i].value * inventory[i].count;
         }
     }
+    inventory = [];
     money += value;
     outputText.innerHTML = "Sold All Items For $" + numberWithCommas(value) + "<br>You Now Have $" + numberWithCommas(money);
 }
@@ -66,22 +71,35 @@ function MakeMoney() {
 function Use(command) {
     switch(command[1]) {
         case "commonbox":
-            console.log("Opening Commonbox...");
-            if (parseInt(command[2])) {
-                let amount = parseInt(command[2]);
-                let results = [];
-                for (let i = 0; i<amount; i++) {
-                    results.push(OpenBox("Common"));
-                }
-                inventory = inventory.concat(ShowArray(results, outputText));
-            }
-            else {
-                let result = OpenBox("Common");
-                inventory.push(result);
-                ShowItem(result);
-            }
+            UseBox(command, "common");
+            break;
+        case "uncommonbox":
+            UseBox(command, "uncommon");
+            break;
+        case "rarebox":
+            UseBox(command, "rare");
+            break;
+        case "ultrararebox":
+            UseBox(command, "ultrarare");
+            break;
         default:
             console.log(command[2]);
+    }
+}
+
+function UseBox(command, tier) {
+    if (parseInt(command[2])) {
+        let amount = parseInt(command[2]);
+        let results = [];
+        for (let i = 0; i<amount; i++) {
+            results.push(OpenBox(tier));
+        }
+        inventory = inventory.concat(ShowArray(results, outputText));
+    }
+    else {
+        let result = OpenBox(tier);
+        inventory.push(result);
+        ShowItem(result);
     }
 }
 
@@ -113,19 +131,58 @@ function numberWithCommas(x) {
 function OpenBox(type) {
     let result;
     switch(type) {
-        case "Common":
-            result = RandomCommonItem();
-            result = new Item(result.name, result.value);
+        case "common":
+            result = GetItem(0);
             break;
+        case "uncommon":
+            result = GetItem(1);
+            break;
+        case "rare":
+            result = GetItem(2);
+            break;
+        case "ultrarare":
+            result = GetItem(3);
+            break;
+        default:
+            console.log("Not a box");
     }
+    result = new Item(result.name, result.value, result.tier);
     return result;
 }
 
 function ShowItem(item, returnString = false, htmlElement) {
     if (returnString) {
-        return "<b>"+item.name + "</b>" + " $" + item.value + " x" + item.count;
+        str = FormatStringItemName(item);
+        str += " $" + item.value + " x" + item.count;
+        return str;
     }
-    htmlElement.innerHTML = item.name + " $" + item.value + " x" + item.count;
+    htmlElement.innerHTML = FormatStringItemName(item) + " $" + item.value + " x" + item.count;
+}
+
+function FormatStringItemName(item) {
+    let str = "";
+    console.log(item);
+    switch(item.tier) {
+        case 0:
+            str = "<b>"+item.name+"</b>";
+            break;
+        case 1:
+            str = '<span class="uncommon">'+item.name+'</span>';
+            break;
+        case 2:
+            str = '<span class="rare">'+item.name+'</span>';
+            break;
+        case 3:
+            str = '<span class="ultrarare">'+item.name+'</span>';
+            break;
+        case 4:
+            str = '<span class="god">'+item.name+'</span>';
+            break;
+        default:
+            console.log("Uh Oh");
+    }
+    console.log(str);
+    return str;
 }
 
 function CompressArray(arr) {
@@ -161,6 +218,29 @@ function SortItemArray(arr) {
     return newArr;
 }
 
-function RandomCommonItem() {
-    return commonItems[Math.floor(Math.random() * commonItems.length)];
+function CoinFlip(choice, amount) {
+    let num = Math.random();
+    console.log(num);
+    out = "";
+    if (num > 0.5) {
+        if (choice == "heads") {
+            money += amount;
+            out = "You <b>WON<\b><br>You got $" + numberWithCommas(amount*2);
+        }
+        else {
+            money -= amount;
+            out = "You <b>LOST<\b><br>You Lost $" + numberWithCommas(amount);
+        }
+    }
+    else{
+        if (choice == "tails") {
+            money += amount;
+            out = "You <b>WON<\b><br>You got $" + numberWithCommas(amount*2);
+        }
+        else {
+            money -= amount;
+            out = "You <b>LOST\<b><br>You Lost $" + numberWithCommas(amount);
+        }
+    }
+    outputText.innerHTML = out;
 }

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script src="loottable.js"></script>
     <script src="items.js"></script>
 
     <div class="TitleBox">
@@ -12,9 +13,23 @@
         <hr>
         <h2>Web Edition</h2>
     </div>
-    <div class="OutputDiv"> 
-        <p id="OutputText">Waiting For Command...</p>
+    <div class="MiddleSection">
+        <div class="CommandsDiv">
+            <h1><u>Commands</u></h1>
+            <p>
+                <b>use [box name eg commonbox] [amount]</b> opens the box type<br>
+                <b>sellall</b> sells all items in your inventory<br>
+                <b>inv</b> shows inventory and current money<br>
+                <b>start</b> start making idle money<br>
+                <b>stop</b> stop making idle money<br>
+                <b>coinflip [heads or tails] [bet amount]</b> ready to lose your money?
+            </p>
+        </div>
+        <div class="OutputDiv"> 
+            <p id="OutputText">Waiting For Command...</p>
+        </div>
     </div>
+    
     <div class="InputBox">
         <div>
             <input id="Input" type="Text" placeholder="Enter Command" onkeypress="ifEnter(this)">
