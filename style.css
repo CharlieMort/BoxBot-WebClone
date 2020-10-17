@@ -105,6 +105,11 @@ input:focus {
   font-size: 2rem;
 }
 
+.BoxTitle {
+  color: 66fcf1;
+  font-size: 3rem;
+}
+
 .common {
   color: white;
 }

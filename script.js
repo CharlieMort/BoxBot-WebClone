@@ -1,4 +1,6 @@
 let inventory = [];
+let boxInv = [0,0,0,0];
+const boxPrices = [5000, 12500, 25000, 75000]
 const outputText = document.getElementById("OutputText");
 let idling;
 let money = 0;
@@ -20,7 +22,15 @@ function submitCommand(command) {
       if (!idling) Use(command);
       break;
     case "inv":
-      if (!idling) ShowArray(inventory, outputText);
+      if (!idling) {
+        let x = ShowArray(inventory, outputText, true);
+        x += `<br><span class="BoxTitle"><u><b>Boxes</b></u></span>`;
+        x += `<br><span class="common"><b>Common</b></span> Boxes - ${boxInv[0]}`;
+        x += `<br><span class="uncommon"><b>Uncommon</b></span> Boxes - ${boxInv[1]}`;
+        x += `<br><span class="rare"><b>Rare</b></span> Boxes - ${boxInv[2]}`;
+        x += `<br><span class="ultrarare"><b>Ultra Rare</b></span> Boxes - ${boxInv[3]}`;
+        outputText.innerHTML = x;
+      }
       break;
     case "start":
       if (!idling) {
@@ -37,6 +47,9 @@ function submitCommand(command) {
       break;
     case "coinflip":
       CoinFlip(command[1], command[2]);
+      break;
+    case "buy":
+      outputText.innerHTML = Buy(command);
       break;
     default:
       outputText.innerHTML = "Unknown Command";
@@ -73,18 +86,45 @@ function MakeMoney() {
 }
 
 function Use(command) {
+  let amount;
+  if (command[2]) amount = parseInt(command[2]);
+  else amount = 1;
   switch (command[1]) {
     case "commonbox":
-      UseBox(command, "common");
+      if (boxInv[0] >= amount) {
+        UseBox(command, "common");
+        boxInv[0]--;
+      }
+      else {
+        outputText.innerHTML = "You Dont Have That Many Common Boxes<br>Go Buy Some Using buy commonbox [amount]";
+      }
       break;
     case "uncommonbox":
-      UseBox(command, "uncommon");
+      if (boxInv[1] >= amount) {
+        UseBox(command, "uncommon");
+        boxInv[1]--;
+      }
+      else {
+        outputText.innerHTML = "You Dont Have That Many Uncommon Boxes<br>Go Buy Some Using buy uncommonbox [amount]";
+      }
       break;
     case "rarebox":
-      UseBox(command, "rare");
+      if (boxInv[2] >= amount) {
+        UseBox(command, "rare");
+        boxInv[2]--;
+      }
+      else {
+        outputText.innerHTML = "You Dont Have That Many Rare Boxes<br>Go Buy Some Using buy rarebox [amount]";
+      }
       break;
     case "ultrararebox":
-      UseBox(command, "ultrarare");
+      if (boxInv[3] >= amount) {
+        UseBox(command, "ultrarare");
+        boxInv[3]--;
+      }
+      else {
+        outputText.innerHTML = "You Dont Have That Many UltraRare Boxes<br>Go Buy Some Using buy ultrararebox [amount]";
+      }
       break;
     default:
       outputText.innerHTML = "Not A Box";
@@ -282,4 +322,49 @@ function CoinFlip(choice, amount) {
   }
   console.log(money);
   outputText.innerHTML = out;
+}
+
+function Buy(command) {
+  let amount;
+  if (command[2]) amount = parseInt(command[2]);
+  else amount = 1;
+  console.log(amount);
+  let price = 0;
+  if (amount == 0) amount = 1;
+  switch(command[1]) {
+      case "commonbox":
+        price = amount*boxPrices[0];
+        if (money < price) {
+          return `You Can't Afford That<br>You Need $${numberWithCommas(amount)} and you have $${numberWithCommas(money)}`;
+        }
+        boxInv[0] += amount;
+        money -= price;
+        return `You Just Bought<br>x${amount} <span class="common"><b>Common</b></span> Boxes For $${numberWithCommas(price)}<br>You Now Have $${numberWithCommas(money)}`;
+      case "uncommonbox":
+        price = amount*boxPrices[1];
+        if (money < price) {
+          return `You Can't Afford That<br>You Need $${numberWithCommas(amount)} and you have $${numberWithCommas(money)}`;
+        }
+        boxInv[1] += amount;
+        money -= price;
+        return `You Just Bought<br>x${amount} <span class="uncommon"><b>Uncommon</b></span> Boxes For $${numberWithCommas(price)}<br>You Now Have $${numberWithCommas(money)}`;
+      case "rarebox":
+        price = amount*boxPrices[2];
+        if (money < price) {
+          return `You Can't Afford That<br>You Need $${numberWithCommas(amount)} and you have $${numberWithCommas(money)}`;
+        }
+        boxInv[2] += amount;
+        money -= price;
+        return `You Just Bought<br>x${amount} <span class="rare"><b>Rare</b></span> Boxes For $${numberWithCommas(price)}<br>You Now Have $${numberWithCommas(money)}`;
+      case "ultrararebox":
+        price = amount*boxPrices[3];
+        if (money < price) {
+          return `You Can't Afford That<br>You Need $${numberWithCommas(amount)} and you have $${numberWithCommas(money)}`;
+        }
+        boxInv[3] += amount;
+        money -= price;
+        return `You Just Bought<br>x${amount} <span class="ultrarare"><b>Ultra Rare</b></span> Boxes For $${numberWithCommas(price)}<br>You Now Have $${numberWithCommas(money)}`;
+      default:
+          outputText.innerHTML = "Not A Box";
+  }
 }
