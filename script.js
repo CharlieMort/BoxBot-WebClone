@@ -3,7 +3,7 @@ let boxInv = [0,0,0,0];
 const boxPrices = [5000, 12500, 25000, 75000]
 const outputText = document.getElementById("OutputText");
 let idling;
-let money = 0;
+let money = 50000;
 let awaitingSecondCommand = false;
 
 function ifEnter(ele) {
@@ -75,7 +75,7 @@ function SellAll() {
     numberWithCommas(money);
 }
 
-let mps = 5;
+let mps = 100;
 let moneyMade = 0;
 function MakeMoney() {
   let out = "Making You Some Sweet Cash At $" + mps + "/s !!<br>";
