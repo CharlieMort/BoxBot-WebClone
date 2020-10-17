@@ -1,112 +1,126 @@
 body {
-    background-color: #133b5c;
-    border: 5px solid #fcdab7;
-    margin: 0;
-    padding: 5px;
+  background-color: #0b0c10;
+  border: 5px solid #45a29e;
+  margin: 0;
+  padding: 5px;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .TitleBox {
-    height: fit-content;
-    padding: 5rem;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    background-color: #1d2d50;
-    flex-direction: column;
-    color: #fcdab7;
+  height: fit-content;
+  padding: 5rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background-color: #0b0c10;
+  flex-direction: column;
+  color: #66fcf1;
 }
 
 .TitleBox hr {
-    width: 25%;
+  width: 50%;
+  color: 66fcf1;
 }
 .TitleBox h1 {
-    margin: 0;
-    font-size: 5rem;
+  margin: 0;
+  font-size: 5rem;
 }
 
 .TitleBox h2 {
-    font-size: 2rem;
-    margin:0;
+  font-size: 2rem;
+  margin: 0;
 }
 
 .OutputDiv {
-    flex: 2;
-    height: fit-content;
-    padding: 5rem;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    background-color: #133b5c;
-    height: fit-content;
-    color: #fcdab7;
+  flex: 2;
+  height: fit-content;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  background-color: #0b0c10;
+  height: fit-content;
+  color: #66fcf1;
 }
 
 .OutputDiv p {
-    font-size: 2rem;
-    height: max-content;
-    margin: 0;
+  font-size: 2rem;
+  height: max-content;
+  margin: 0;
 }
 
 #Input {
-    text-align: center;
+  text-align: center;
 }
 
 .InputBox {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #133b5c;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #0b0c10;
 }
 
 input {
-    border: 5px solid #fcdab7; 
-    padding: 15px;
-    background-color: #1d2d50;
-    color: #fcdab7;
-    font-size: 1rem;
-    font-family: 'Times New Roman', Times, serif;
-    margin: 0 0 10px 0;
+  border: 5px solid #45a29e;
+  padding: 15px;
+  background-color: #1f2833;
+  color: #66fcf1;
+  font-size: 1rem;
+  margin: 0 0 10px 0;
 }
 
-textarea:focus, input:focus{
-    outline: none;
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 .MiddleSection {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .CommandsDiv {
-    flex: 1;
-    border: 5px solid #fcdab7;
-    background-color: #133b5c;
-    color: #fcdab7;
-    padding: 2rem;
+  flex: 1;
+  border: 5px solid #45a29e;
+  background-color: #0b0c10;
+  color: #66fcf1;
+  padding: 2rem;
+}
+
+.RightSide {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  flex: 2.5;
 }
 
 .CommandsDiv p b {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .CommandsDiv h1 {
-    font-size: 2rem;
+  font-size: 2rem;
+}
+
+.common {
+  color: white;
 }
 
 .uncommon {
-    color: green;
+  color: lightgreen;
 }
 
 .rare {
-    color: blue;
+  color: #006eff;
 }
 
 .ultrarare {
-    color: purple;
+  color: #ff00ff;
 }
 
 .god {
-    color: gold;
+  color: gold;
 }

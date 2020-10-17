@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>BoxBot</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <script src="loottable.js"></script>
     <script src="items.js"></script>
@@ -25,17 +27,19 @@
                 <b>coinflip [heads or tails] [bet amount]</b> ready to lose your money?
             </p>
         </div>
-        <div class="OutputDiv"> 
-            <p id="OutputText">Waiting For Command...</p>
-        </div>
-    </div>
-    
-    <div class="InputBox">
-        <div>
-            <input id="Input" type="Text" placeholder="Enter Command" onkeypress="ifEnter(this)">
+        <div class="RightSide">
+            <div class="OutputDiv">
+                <p id="OutputText">Waiting For Command...</p>
+            </div>
+            <div class="InputBox">
+                <div>
+                    <input id="Input" type="Text" placeholder="Enter Command" onkeypress="ifEnter(this)">
+                </div>
+            </div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
